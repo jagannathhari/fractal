@@ -9,11 +9,18 @@
 #define SCALE 100
 #define WIDTH 16*SCALE
 #define HEIGHT 9*SCALE
+#define MAX_LEVEL 20
+#define MIN_LEVEL 0
+
+#define max(a, b) ((a) > (b)) ? (a) : (b)
+#define min(a, b) ((a) < (b)) ? (a) : (b)
+
 typedef struct {
     float x;
     float y;
     float angle;
 } State;
+
 float length = 10;
 float angle = 0;
 char **productions = NULL;
@@ -111,6 +118,13 @@ int main(int argc, char **argv) {
             camera.target = (Vector2){world.x + 20.0f, world.y + 20.0f}; // Reset to initial position
         }
 
+        if(IsKeyReleased(KEY_J)){
+            world.level = max(MIN_LEVEL,world.level-1);
+        }
+
+        if(IsKeyReleased(KEY_K)){
+            world.level = min(MAX_LEVEL,world.level+1);
+        }
 
         BeginDrawing();
         ClearBackground(BLACK);

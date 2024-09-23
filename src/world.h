@@ -10,5 +10,5 @@ typedef struct {
 } World;
 
 void print_world(World *world);
-void load_world(char *file_name, World *world);
+void *load_world(char *file_name, World *world);
 #endif // _INCLUDE_WORLD_H_

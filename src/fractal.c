@@ -76,8 +76,14 @@ int main(int argc, char **argv) {
         printf("Uses fractal <fractal file (.frc)>\n");
         return 0;
     }
+
     World world;
-    load_world(argv[1], &world);
+
+    if(!load_world(argv[1], &world)){
+        printf("Unable to load world. %s is invalid or currpted",argv[1]);
+        return 0;
+    }
+
     angle = rad(world.angle);
     length = world.length;
     productions = world.productions;
@@ -139,14 +145,15 @@ int main(int argc, char **argv) {
 
         EndDrawing();
     }
+
     CloseWindow();
+
     free(world.axioms);
     for(int i = 0; i< 256 ; i++){
         if(world.productions[i]){
             free(world.productions[i]);
         }
     }
-    // todo fix segmentaion fault
-    // todo handle error 
+
     return 0;
 }

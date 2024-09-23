@@ -62,7 +62,12 @@ void load_world(char *file_name, World *world) {
                 ERROR(line);
         } else if (STR_EQL("rules", command)) {
             String *axioms = read_line(f);
-            world->axioms = axioms;
+            char *temp = malloc(vector_length(axioms));
+            memcpy(temp,axioms,vector_length(axioms));
+            free_vector(axioms);
+
+            world->axioms = temp;
+
             String *productions;
             while ((productions = read_line(f))) {
                 char vertex = '\0';

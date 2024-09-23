@@ -1,6 +1,7 @@
 #include <complex.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "./world.h"
 #include "raylib.h"
@@ -139,8 +140,12 @@ int main(int argc, char **argv) {
         EndDrawing();
     }
     CloseWindow();
-    // todo free memory
-    // todo fix memory leaks
+    free(world.axioms);
+    for(int i = 0; i< 256 ; i++){
+        if(world.productions[i]){
+            free(world.productions[i]);
+        }
+    }
     // todo fix segmentaion fault
     // todo handle error 
     return 0;

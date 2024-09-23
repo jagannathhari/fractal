@@ -1,0 +1,9 @@
+initial_state 250 200 0
+length 100
+angle 60
+name testing
+levels 10
+rules
+A
+A AbA
+b bbb

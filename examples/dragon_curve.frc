@@ -1,0 +1,9 @@
+initial_state 250 200 0
+length 10
+angle 90
+name KochCurve
+levels 14
+rules
+F
+F F+G
+G F-G

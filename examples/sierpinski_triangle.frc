@@ -1,0 +1,9 @@
+initial_state 250 200 0
+length 100
+angle 120
+name sierpinski_triangle 
+levels 10
+rules
+F-G-G
+F F-G+F+G-F
+G GG

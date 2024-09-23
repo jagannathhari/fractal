@@ -13,3 +13,9 @@ cd fractal
 ```console
 ./bin/fractal ./examples/dragon_curve.frc
 ```
+
+# Screenshots
+
+![Image Not Found](screenshots/1.png)
+![Image Not Found](screenshots/2.png)
+![Image Not Found](screenshots/3.png)

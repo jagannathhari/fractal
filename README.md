@@ -17,5 +17,4 @@ cd fractal
 # Screenshots
 
 ![Image Not Found](screenshots/1.png)
-![Image Not Found](screenshots/2.png)
 ![Image Not Found](screenshots/3.png)

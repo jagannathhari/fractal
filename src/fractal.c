@@ -4,6 +4,10 @@
 #include <stdlib.h>
 
 #include "./world.h"
+
+#define IMPLEMENT_VECTOR
+#include "./vector.h"
+
 #include "raylib.h"
 
 #define rad(degrees) (PI / 180) * (degrees)
@@ -57,18 +61,30 @@ void process_string(char *p, State *s) {
     }
 }
 
-void expand_production(char *p, int level, State *s) {
-    if (!level) {
-        process_string(p, s);
-        return;
+char *expand_production(char *axiom, unsigned int level){
+    char *previous = Vector(*previous);
+    char *current = NULL;
+    while(*axiom){
+        vector_append(previous, *axiom++);
     }
-    for (int i = 0; p[i]; i++) {
-        if (productions[p[i]]) {
-            expand_production(productions[p[i]], level - 1, s);
-        } else {
-            process_char(p[i], s);
+    while(level--){
+        current = Vector(*current);
+        size_t len = vector_length(previous);
+        for(size_t i = 0; i< len;i++){
+            if(productions[previous[i]]){
+                char *temp = productions[previous[i]];
+                while(*temp){
+                    vector_append(current, *temp++);
+                }
+            }else{
+                vector_append(current,previous[i]);
+            }
         }
+        free_vector(previous);
+        previous = current;
     }
+    vector_append(previous,'\0');
+    return previous;
 }
 
 int main(int argc, char **argv) {
@@ -83,7 +99,7 @@ int main(int argc, char **argv) {
         printf("Unable to load world. %s is invalid or currpted",argv[1]);
         return 0;
     }
-
+    print_world(&world);
     angle = rad(world.angle);
     length = world.length;
     productions = world.productions;
@@ -100,6 +116,7 @@ int main(int argc, char **argv) {
 
     Vector2 previousMousePosition = {0, 0};
     bool isPanning = false;
+    char *result = expand_production(world.axioms,world.level);
     while (!WindowShouldClose()) {
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
             Vector2 mousePosition = GetMousePosition();
@@ -137,7 +154,7 @@ int main(int argc, char **argv) {
         ClearBackground(BLACK);
         BeginMode2D(camera);
 
-            expand_production(world.axioms, world.level, &state);
+            process_string(result,&state);
             state = (State){world.x, world.y, rad(world.initital_angle)};
         
 

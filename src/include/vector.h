@@ -12,6 +12,7 @@ typedef struct {
     size_t capacity;
     size_t element_size;
     size_t length;
+    void *my_location;
 } VectorHeader;
 
 #define VECTOR_CAPACITY                 16

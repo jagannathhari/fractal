@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define IMPLEMENT_VECTOR
-#include "./vector.h"
+#include "vector.h"
 
-#include "./world.h"
+#include "world.h"
 
 #define rad(degrees) (PI/ 180) * (degrees)
 #define ANGLE rad(90)
@@ -39,8 +38,6 @@ void *load_world(char *file_name, World *world) {
     String *line = NULL;
     while ((line = read_line(f))) {
         sscanf(line, "%19s", command);
-        puts(line);
-        fflush(stdout);
         if (STR_EQL("initial_state", command)) {
             if (sscanf(line, "initial_state %f %f %f", &world->x,&world->y, &world->initital_angle) != 3) goto error;
 

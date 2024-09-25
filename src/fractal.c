@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./world.h"
+#include "world.h"
 
 #define IMPLEMENT_VECTOR
-#include "./vector.h"
+#include "vector.h"
 
 #include "raylib.h"
 
@@ -89,6 +89,8 @@ char *expand_production(char *axiom, unsigned int level){
 
 int main(int argc, char **argv) {
     if(argc != 2){
+
+        printf("%f",GetFrameTime());
         printf("Uses fractal <fractal file (.frc)>\n");
         return 0;
     }
@@ -116,7 +118,9 @@ int main(int argc, char **argv) {
 
     Vector2 previousMousePosition = {0, 0};
     bool isPanning = false;
+
     char *result = expand_production(world.axioms,world.level);
+
     while (!WindowShouldClose()) {
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
             Vector2 mousePosition = GetMousePosition();
@@ -144,10 +148,14 @@ int main(int argc, char **argv) {
 
         if(IsKeyReleased(KEY_J)){
             world.level = max(MIN_LEVEL,world.level-1);
+            free_vector(result);
+            result = expand_production(world.axioms,world.level);
         }
 
         if(IsKeyReleased(KEY_K)){
             world.level = min(MAX_LEVEL,world.level+1);
+            free_vector(result);
+            result = expand_production(world.axioms,world.level);
         }
 
         BeginDrawing();

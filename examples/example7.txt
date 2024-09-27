@@ -1,0 +1,9 @@
+initial_state 250 200 0
+length 8
+angle 90
+name testing
+levels 4
+rules
+X
+X -YF+XFX+FY-
+Y +XF-YFY-FX+

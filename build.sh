@@ -69,5 +69,5 @@ SOURCES="./src/fractal.c ./src/world.c"
 if [[ "$OS" == "Linux" || "$OS" == "Darwin" ]]; then
     cc $SOURCES -o ./bin/fractal -I$INCLUDE_PATH_RAYLIB -I$INCLUDE_PATH -L$LIB_PATH -l:libraylib.a -lm
 elif [[ "$OS" == *"NT"* ]]; then
-    gcc $SOURCES -o ./bin/fractal.exe -I$INCLUDE_PATH_RAYLIB -I$INCLUDE_PATH -L$LIB_PATH -l:ribraylib.a -lm
+    gcc $SOURCES -o ./bin/fractal.exe -I$INCLUDE_PATH_RAYLIB -I$INCLUDE_PATH -L$LIB_PATH -l:libraylib.a -lm -lopengl32 -lgdi32 -lwinmm
 fi

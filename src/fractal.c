@@ -17,8 +17,8 @@
 #define MAX_LEVEL 20
 #define MIN_LEVEL 0
 
-#define max(a, b) ((a) > (b)) ? (a) : (b)
-#define min(a, b) ((a) < (b)) ? (a) : (b)
+#define max(a, b) (((a) > (b)) ? (a) : (b))
+#define min(a, b) (((a) < (b)) ? (a) : (b))
 
 typedef struct {
     float x;
